@@ -9,14 +9,12 @@
 
 using namespace std;
 
-//This is the structure class of the inventory system.
+//This is the structure class of the Todo List system.
 class TodoList
 {
 public:
     int taskIdNumber;
     static int countItem;
-
-
 
     string task, date, allTask;
     //set added date
@@ -24,6 +22,8 @@ public:
 
     TodoList* next;
 
+    //Specification C4 - TODO array
+    //Creating link list as dynamic array
     TodoList* head;
 
     //Default Constructor
@@ -31,7 +31,6 @@ public:
     {
         head = NULL;
         next = NULL;
-        //countItem = 1;
     }
 
     //Specification A4 - Overload Constructor
@@ -107,21 +106,23 @@ public:
 
 int main ()
 {
-    ofstream outputFile("TDL.txt", ios_base::app);
-    //creating an Date type object
-    TodoList todoList;
-    todoList.loadDataFromFile();
-    //ifstream inputFile("TDL.txt");
 
+    //creating an TodoList type object
+    TodoList todoList;
+
+    //Loading previous data from file
+    //Specification B4 - Persistence
+    todoList.loadDataFromFile();
+
+    ofstream outputFile("TDL.txt", ios_base::app);
+
+    //get current date
     todoList.getDate();
+
     //Showing welcome message
     todoList.ProgramGreeting();
 
     todoList.componentTesting();
-
-    //Specification A4 - UnitTest() method in main()
-    //date.Due_Date_is_valid();
-    //date.Added_Date_is_valid();
 
     //Showing the main menu
     todoList.AlphaMenu();
@@ -148,6 +149,7 @@ void  TodoList:: ProgramGreeting()
     cout<<""<<endl;
 }
 
+//Specification C3 - Test TODO’s
 void TodoList:: componentTesting()
 {
     TodoList tl1,tl2;
@@ -250,93 +252,6 @@ void TodoList:: componentTesting()
 }
 
 
-/*
-void TodoList:: componentTesting()
-{
-    TodoList tl1,tl2;
-
-    printf("Starting Component Testing.\n");
-
-    TodoList* newNode;
-    newNode = new TodoList ();
-
-    newNode->task = "Component testing 1";
-    newNode->date = to_string(currentMonth) + "/" + to_string(currentDay) + "/" + to_string(currentYear);
-    countItem++;
-    newNode->taskIdNumber = countItem;
-    head = newNode;
-
-    //Implementing Overload Copy Constructor and Overload Assignment Operator
-    tl1 = new TodoList(newNode);
-    TodoList tl3 = tl1;
-    tl1 = tl2;
-
-
-    newNode = new TodoList ();
-    countItem++;
-    newNode->task = "Component testing 2";
-    newNode->date = to_string(currentMonth) + "/" + to_string(currentDay) + "/" + to_string(currentYear);
-    newNode->taskIdNumber = countItem;
-    TodoList* temp = head;
-    while(temp->next != NULL)
-    {
-        //update temp
-        temp = temp->next;
-    }
-    //Specification C3 - Resize Array - add to end
-    temp->next = newNode;
-
-    newNode = new TodoList ();
-    countItem++;
-    newNode->task = "Component testing 3";
-    newNode->date = to_string(currentMonth) + "/" + to_string(currentDay) + "/" + to_string(currentYear);
-    newNode->taskIdNumber = countItem;
-    temp = head;
-    while(temp->next != NULL)
-    {
-        //update temp
-        temp = temp->next;
-    }
-    //Specification C3 - Resize Array - add to end
-    temp->next = newNode;
-
-    newNode = new TodoList ();
-    countItem++;
-    newNode->task = "Component testing 4";
-    newNode->date = to_string(currentMonth) + "/" + to_string(currentDay) + "/" + to_string(currentYear);
-    newNode->taskIdNumber = countItem;
-    temp = head;
-    while(temp->next != NULL)
-    {
-        //update temp
-        temp = temp->next;
-    }
-    //Specification C3 - Resize Array - add to end
-    temp->next = newNode;
-
-    newNode = new TodoList ();
-    newNode->task = "Component testing 5";
-    countItem++;
-    newNode->date = to_string(currentMonth) + "/" + to_string(currentDay) + "/" + to_string(currentYear);
-    newNode->taskIdNumber = countItem;
-    temp = head;
-    while(temp->next != NULL)
-    {
-        //update temp
-        temp = temp->next;
-    }
-    //Specification C3 - Resize Array - add to end
-    temp->next = newNode;
-
-
-
-    //head->next = NULL;
-
-    printf("Todo List Component Testing Done. Generated 5 to do Tasks Successfully.");
-}
-*/
-
-
 void TodoList:: AlphaMenu()
 {
     while(1)
@@ -355,10 +270,12 @@ void TodoList:: AlphaMenu()
             //Specification B3 - Menu Input Validation
             if(userInput == '+')
             {
+                //Specification B1 - + Symbol
                 addInventory();
             }
             else if(userInput == '?')
             {
+                //Specification B2 - ? Symbol
                 showInventory();
             }
             else if (userInput == 'X' || userInput == 'x')
@@ -371,6 +288,7 @@ void TodoList:: AlphaMenu()
                 int delTaskId;
                 cout<<"Please enter the task id number that you want to delete"<<endl;
                 cin>>delTaskId;
+                //Specification B3 - - symbol
                 deleteInventory(delTaskId);
             }
             else
@@ -400,7 +318,7 @@ void TodoList:: addInventory()
     //create the new node with data
     TodoList* newNode = new TodoList ();
 
-    //Specification A3 - Overload operator >>
+    //Specification C2 - Overload >>
     cin>>*newNode;
     int flag = 0;
     if(newNode->task=="")
@@ -442,8 +360,7 @@ void TodoList:: addInventory()
         //cout<<head->taskIdNumber<<endl;
         temp->next = newNode;
     }
-    //cout<<"HI THIS IS ANTOR"<<head->taskIdNumber<<endl;
-    //cout<<head->task<<endl;
+
     if(flag == 1)
     {
         cout<<"\nSuccessfully added dummy task!!\n"<<endl;
@@ -472,7 +389,7 @@ void TodoList:: showInventory()
     //Traverse the List
     while(temp != NULL)
     {
-        //Specification A2 - Overload operator <<
+        //Specification C1 - Overload <<
         cout<<"\n-----------------------------------------------------------------------\n"<<endl;
         cout<<*temp;
         temp = temp->next;
@@ -527,6 +444,7 @@ void TodoList:: deleteInventory(int idNum)
                 //node will be disconnected from the linked list.
                 current->next = current->next->next;
                 free(temp);
+                flag = 1;
                 break;
             }
             //Otherwise, move the current node and proceed
@@ -535,7 +453,14 @@ void TodoList:: deleteInventory(int idNum)
         }
     }
 
-    cout<<"\nSuccessfully Deleted Task Id: "<< idNum<<endl;
+    if(flag)
+    {
+        cout<<"\nSuccessfully Deleted Task Id: "<< idNum<<endl;
+    }
+    else
+    {
+        cout<<"\nGiven Task ID Is Not Exist in the Task List: "<< idNum<<endl;
+    }
 }
 
 
@@ -612,14 +537,8 @@ void TodoList:: loadDataFromFile()
             }
             temp->next = newNode;
         }
-        //cout<<"Task Id :"<<stoi (idNum)<<"\n";
-        //output<<"Date Added: "<<d.date<<"\n";
-        //output<<"Task to Do: "<<d.task<<"\n";
-        //cout<<line<<endl;
-
-        // process pair (a,b)
     }
 
     infile.close();
-    //ifstream ("TDL.txt");
+    remove("TDL.txt");
 }
