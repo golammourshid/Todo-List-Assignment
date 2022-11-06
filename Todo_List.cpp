@@ -146,7 +146,7 @@ void  TodoList:: ProgramGreeting()
     cout<<"Welcome to our TodoList management system.";
     cout<<"This system is designed for adding new\ntasks, delete any task from the system. ";
     cout<<"It also allow you to show all the task\n list any time."<<endl;
-    cout<<"Author Name: Md. Fahim Alam"<<endl;
+    cout<<"Author Name: Md Fahim Alam"<<endl;
     cout<<"Assignment Due Date: November 06, 2022\n";
     cout<<"Current Date(month-day-year): "<<currentMonth<<"-"<<currentDay<<"-"<<currentYear<<endl;
     cout<<"********************************************************************************\n                                 ProgramGreetings\n"<<endl;
