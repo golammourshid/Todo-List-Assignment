@@ -90,15 +90,15 @@ public:
     //Testing component and generate 5 To do tasks
     void AlphaMenu();
     //Output Main Menu to console
-    void addInventory();
+    void addTask();
     //Add new item to inventory at the last, selected from Main Menu
-    void showInventory();
+    void showTask();
     //Displays current items in inventory
     void getDate();
     //Calculating Date
-    void saveInventory();
+    void saveTask();
     //Save item in the inventory
-    void deleteInventory(int idNum);
+    void deleteTask(int idNum);
     //Delete the last item from the inventory, decrease array by 1
     void loadDataFromFile();
     // the last item from the inventory, decrease array by 1
@@ -126,7 +126,7 @@ int main ()
 
     //Showing the main menu
     todoList.AlphaMenu();
-    todoList.saveInventory();
+    todoList.saveTask();
 
     outputFile<<todoList.allTask;
 
@@ -198,7 +198,6 @@ void TodoList:: componentTesting()
         //update temp
         temp = temp->next;
     }
-    //Specification C3 - Resize Array - add to end
     temp->next = newNode;
 
     newNode = new TodoList ();
@@ -212,7 +211,6 @@ void TodoList:: componentTesting()
         //update temp
         temp = temp->next;
     }
-    //Specification C3 - Resize Array - add to end
     temp->next = newNode;
 
     newNode = new TodoList ();
@@ -226,7 +224,6 @@ void TodoList:: componentTesting()
         //update temp
         temp = temp->next;
     }
-    //Specification C3 - Resize Array - add to end
     temp->next = newNode;
 
     newNode = new TodoList ();
@@ -241,7 +238,6 @@ void TodoList:: componentTesting()
         //update temp
         temp = temp->next;
     }
-    //Specification C3 - Resize Array - add to end
     temp->next = newNode;
 
 
@@ -263,20 +259,19 @@ void TodoList:: AlphaMenu()
         //checking user input
         if(userInput=='y' || userInput == 'Y')
         {
-            //Specification C1 - Alpha Menu
             cout<<"\nMain Menu.\n--------------------------------"<<endl;
             cout<<"[+] Add a ToDo Item\n[-] Delete a ToDo Item\n[?] Display all ToDo Items\n[x] Exit Program"<<endl;
             cin>>userInput;
-            //Specification B3 - Menu Input Validation
+
             if(userInput == '+')
             {
                 //Specification B1 - + Symbol
-                addInventory();
+                addTask();
             }
             else if(userInput == '?')
             {
                 //Specification B2 - ? Symbol
-                showInventory();
+                showTask();
             }
             else if (userInput == 'X' || userInput == 'x')
             {
@@ -289,7 +284,7 @@ void TodoList:: AlphaMenu()
                 cout<<"Please enter the task id number that you want to delete"<<endl;
                 cin>>delTaskId;
                 //Specification B3 - - symbol
-                deleteInventory(delTaskId);
+                deleteTask(delTaskId);
             }
             else
             {
@@ -310,7 +305,7 @@ void TodoList:: AlphaMenu()
 
 int TodoList:: countItem = 0;
 
-void TodoList:: addInventory()
+void TodoList:: addTask()
 {
     //increasing number of item by 1
     //countItem++;
@@ -356,8 +351,6 @@ void TodoList:: addInventory()
             temp = temp->next;
         }
 
-        //Specification C3 - Resize Array - add to end
-        //cout<<head->taskIdNumber<<endl;
         temp->next = newNode;
     }
 
@@ -372,7 +365,7 @@ void TodoList:: addInventory()
 
 }
 
-void TodoList:: showInventory()
+void TodoList:: showTask()
 {
     TodoList* temp = head;
 
@@ -403,14 +396,13 @@ void TodoList:: getDate()
 
     //Specification A3 - System Date
     tm *dateTime = localtime(&now);
-    //int day,month,year;
     currentDay = dateTime->tm_mday;
     currentMonth = 1 + dateTime->tm_mon;
     currentYear = 1900 + dateTime->tm_year;
 }
 
 
-void TodoList:: deleteInventory(int idNum)
+void TodoList:: deleteTask(int idNum)
 {
     //check if the list is empty
     int flag = 0;
@@ -464,7 +456,7 @@ void TodoList:: deleteInventory(int idNum)
 }
 
 
-void TodoList:: saveInventory()
+void TodoList:: saveTask()
 {
     TodoList* newNode = head;
     allTask = "";
