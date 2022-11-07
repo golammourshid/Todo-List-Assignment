@@ -3,9 +3,10 @@
 // Md Fahim Alam, CISP 400
 // 11/6/22
 
-#include<iostream>
+#include <iostream>
 #include <ctime>
-#include<fstream>
+#include <fstream>
+#include <string>
 
 using namespace std;
 
@@ -77,6 +78,7 @@ public:
     }
 
     //Function Prototype
+		//Program Greeting
     void ProgramGreeting();
 
     void componentTesting();
@@ -139,6 +141,7 @@ int main ()
     return 0;
 }
 
+//Program Greeting
 void  TodoList:: ProgramGreeting()
 {
     cout<<"********************************************************************************\n                                 ProgramGreetings\n"<<endl;
@@ -154,7 +157,7 @@ void  TodoList:: ProgramGreeting()
     cout<<""<<endl;
 }
 
-//Specification C3 - Test TODO’s
+//Specification C3 - Test TODO's
 void TodoList:: componentTesting()
 {
     TodoList tl1,tl2;
@@ -248,57 +251,41 @@ void TodoList:: componentTesting()
 
 void TodoList:: AlphaMenu()
 {
-    while(1)
-    {
-        cout<<"\nDo you want to go Main Menu? (y/n)"<<endl;
-        //Variable to get user input
-        char userInput;
-        cin>>userInput;
-        //checking user input
-        if(userInput=='y' || userInput == 'Y')
-        {
-            cout<<"\nMain Menu.\n--------------------------------"<<endl;
-            cout<<"[+] Add a ToDo Item\n[-] Delete a ToDo Item\n[?] Display all ToDo Items\n[x] Exit Program"<<endl;
-            cin>>userInput;
+	char userInput;
+	int delTaskId;
 
-            if(userInput == '+')
-            {
-                //Specification B1 - + Symbol
-                addTask();
-            }
-            else if(userInput == '?')
-            {
-                //Specification B2 - ? Symbol
-                showTask();
-            }
-            else if (userInput == 'X' || userInput == 'x')
-            {
-                cout<<"\nThanks for visiting!\n"<<endl;
-                return;
-            }
-            else if (userInput == '-')
-            {
-                int delTaskId;
-                cout<<"Please enter the task id number that you want to delete"<<endl;
-                cin>>delTaskId;
-                //Specification B3 - - symbol
-                deleteTask(delTaskId);
-            }
-            else
-            {
-                cout<<"\nPlease enter valid input.\n"<<endl;
-            }
-        }
-        else if(userInput=='n' || userInput == 'N')
-        {
-            cout<<"\nThanks for visiting!\n"<<endl;
-            return;
-        }
-        else
-        {
-            cout<<"\nPlease enter valid input.\n"<<endl;
-        }
-    }
+	for(int i = 0; i >= 0; i++){
+		cout<<"\nMain Menu.\n--------------------------------"<<endl;
+		cout<<"[+] Add a ToDo Item\n[-] Delete a ToDo Item\n[?] Display all ToDo Items\n[x] Exit Program"<<endl;
+		cin>>userInput;
+
+		if(userInput == '+')
+		{
+				//Specification B1 - + Symbol
+				addTask();
+		}
+		else if(userInput == '?')
+		{
+				//Specification B2 - ? Symbol
+				showTask();
+		}
+		else if (userInput == 'X' || userInput == 'x')
+		{
+				cout<<"\nThanks for visiting!\n"<<endl;
+				return;
+		}
+		else if (userInput == '-')
+		{
+				cout<<"Please enter the task id number that you want to delete"<<endl;
+				cin>>delTaskId;
+				//Specification B3 - - symbol
+				deleteTask(delTaskId);
+		}
+		else
+		{
+				cout<<"\nPlease enter valid input.\n"<<endl;
+		}
+	}
 }
 
 int TodoList:: countItem = 0;
@@ -323,17 +310,13 @@ void TodoList:: addTask()
     TodoList tl1 = new TodoList(newNode);
     if(head == NULL)
     {
-        cout<<"HI"<<endl;
         head = newNode;
         cout<<"\nSuccessfully added new task!!\n"<<endl;
     }
 
     else
     {
-        cout<<"Hello"<<endl;
-
         //Traverse Till end of list
-        cout<<head->taskIdNumber<<endl;
         TodoList* temp = head;
         while(temp->next != NULL)
         {
